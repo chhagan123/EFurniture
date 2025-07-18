@@ -216,7 +216,7 @@ const Home = () => {
 
   <Feedback/>
   <Recent/>
-  <Footer/>
+  
      
   
 </div>

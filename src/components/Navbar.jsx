@@ -67,8 +67,8 @@ import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 
 // Navigation items as an array of objects
 const navLinks = [
-  { name: "Home", href: "#", active: false },
-  { name: "Guide To Good Sleep", href: "#", active: false },
+  { name: "Home", href: "/", active: false },
+  { name: "Guide To Good Sleep", href: "tosleep", active: false },
   { name: "Mattress", href: "#", hasDropdown: true, active: false },
   { name: "Royale Series", href: "#", active: false },
   { name: "Sleep Essentials", href: "#", hasDropdown: true, active: false },
