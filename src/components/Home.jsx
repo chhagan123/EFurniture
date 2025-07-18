@@ -3,6 +3,8 @@
 
 import React, { useEffect, useState } from "react";
 import Feedback from "./Feedback";
+import { Recent } from "./Recent";
+import Footer from "./Footer";
 
 // Array of images
 const images = [
@@ -212,27 +214,9 @@ const Home = () => {
         </div>
       </div>
 
-      {/* //Newsletter Section  */}
-       {/* <div className="bg-gradient-to-r from-blue-50 to-indigo-50 py-12">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Get Sleep Tips & Special Offers</h2>
-          <p className="text-gray-600 mb-6">
-            Subscribe to our newsletter for expert sleep advice and exclusive discounts
-          </p>
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-            <button className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors">
-              Subscribe
-            </button>
-          </div>
-        </div>
-      </div> */}
-
-      <Feedback/>
+  <Feedback/>
+  <Recent/>
+  <Footer/>
      
   
 </div>
