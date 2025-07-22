@@ -1,37 +1,77 @@
-// src/Login.js
-import React from "react";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../backend/firebase";
-
-const Login = () => {
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      console.log("✅ User Info:", {
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-        uid: user.uid,
-      });
-
-      // Store or redirect if needed
-    } catch (error) {
-      console.error("❌ Error:", error.message);
-    }
+import React, { useState } from "react";
+function Login() {
+  const [open, setopen] = useState(true);
+  const [data, setdata] = useState({
+    number: " ",
+    password: " ",
+  });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setdata((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  const handlesubmit = async (e) => {
+       e.preventDefault();
+       try{
+        const response  = await fetch ("http://localhost:8000/login",{
+           method:"POST",
+           headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        const result = await response.json()
+        console.log(result);
+
+       if(response.ok){
+        alert("login succesfully")
+        setopen(false)
+       }else {
+        alert("something went wrong")
+       }
+         
+       }catch(err){
+        console.log(err)
+       }
+  }
+
   return (
-    <div className="flex justify-center items-center h-screen">
-      <button
-        onClick={handleGoogleLogin}
-        className="bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700"
-      >
-        Sign in with Google
-      </button>
+    <div className="relative w-full min-h-screen bg-gray-100">
+      {open && (
+        <div className="fixed inset-0 bg-white bg-opacity-50 flex  items-center justify-center z-50">
+          <form onSubmit={handlesubmit} className="bg-white p-8 rounded-xl shadow-lg w-[90%] max-w-md">
+            <input
+              name="number"
+              type="text"
+              placeholder="Phone"
+              value={data.number}
+              onChange={onChange}
+              className="w-full px-4 py-2 border rounded-md mb-4"
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={data.password}
+              onChange={onChange}
+              className="w-full px-4 py-2 border rounded-md mb-4"
+            />
+
+            <button
+           
+              className="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500"
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Login;

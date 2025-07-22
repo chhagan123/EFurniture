@@ -9,7 +9,8 @@ import Routing from "react"
 import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Tosleep } from './components/Tosleep'
-
+import Signup from './components/Signup'
+import Login from './components/Login'
 
 function App() {
   
@@ -21,6 +22,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/tosleep" element={<Tosleep/>} />
+      <Route path="/Signup"  element={<Signup/>} />
+      <Route path='/Login' element={<Login/>} />
+    
+
      
     </Routes>
 
