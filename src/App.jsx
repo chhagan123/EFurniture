@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+
 import './App.css'
 import React from 'react'
 import Navbar from './components/Navbar'
@@ -11,19 +10,29 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Tosleep } from './components/Tosleep'
 import Signup from './components/Signup'
 import Login from './components/Login'
+import { useEffect,useState } from 'react'
 
 function App() {
+
+  const [user,setUser] = useState(null)
+
+  useEffect(() => {
+    const storeuser = localStorage.getItem("user")
+    if(storeuser){
+      setUser(JSON.parse(storeuser))
+    }
+  },[])
   
 
   return (
     <Router>
-    <Navbar />
+    <Navbar user={user} setUser={setUser} />
     
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/tosleep" element={<Tosleep/>} />
       <Route path="/Signup"  element={<Signup/>} />
-      <Route path='/Login' element={<Login/>} />
+      <Route path='/Login'user={user} setUser={setUser} element={<Login/>} />
     
 
      
