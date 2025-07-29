@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 
@@ -13,14 +11,20 @@ const navLinks = [
   { name: "Contact", href: "Signup", active: false },
 ];
 
-const Navbar = () => {
+const Navbar = ({ user, setUser }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [sign,setsig] = useState(false);
+  const [sign, setsig] = useState(false);
 
   const togglesignup = () => {
     setsig(!sign);
-  }
+  };
+
+  const handleLogout = () => {
+    setUser(null); // Clear the user state
+    localStorage.removeItem("user"); // Optional: If you're storing user in localStorage
+    window.location.href = "/Login"; // Redirect to login page
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -38,8 +42,6 @@ const Navbar = () => {
     }
   };
 
- 
-
   return (
     <nav className="bg-[#4736cb] px-4 py-4 sticky top-0 z-50">
       {/* Container to control spacing and responsiveness */}
@@ -47,11 +49,7 @@ const Navbar = () => {
         {/* LEFT SECTION: Logo */}
         <div className="flex items-center">
           <div className="pl-0.5">
-            <img
-              src="/Restin.png"
-              alt="Restin Logo"
-              className="h-10 w-auto"
-            />
+            <img src="/Restin.png" alt="Restin Logo" className="h-10 w-auto" />
           </div>
         </div>
 
@@ -78,10 +76,10 @@ const Navbar = () => {
                   </span>
                 )}
               </a>
-              
+
               {/* Yellow underline appears only on hover */}
               <span className="absolute left-0 -bottom-1 w-0 h-1 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
-              
+
               {/* Dropdown Menu */}
               {link.hasDropdown && activeDropdown === index && (
                 <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg py-2 z-50">
@@ -117,10 +115,21 @@ const Navbar = () => {
               0
             </span>
           </div>
-          <div  className="hidden md:block">
-
-           <a href="Signup">Signup</a>
-            <a className="pl-5" href="Login">Login</a>
+          <div className="hidden md:block">
+            {user ? (
+              <a className="pl-5" href="Profile">
+             Profile
+            </a>
+            ) : (
+              <>
+                <a className="pl-5" href="Login">
+                  Login
+                </a>
+                <a className="pl-5" href="Signup">
+                  Signup
+                </a>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -165,7 +174,7 @@ const Navbar = () => {
                     </span>
                   )}
                 </a>
-                
+
                 {/* Mobile Dropdown */}
                 {link.hasDropdown && activeDropdown === index && (
                   <div className="bg-indigo-700/50 py-2 pl-8">
@@ -203,9 +212,8 @@ const Navbar = () => {
                   </span>
                 </div>
                 <a href="Signup">
-                <FaUser  className="text-xl" />
+                  <FaUser className="text-xl" />
                 </a>
-               
               </div>
             </li>
           </ul>
@@ -216,4 +224,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

@@ -11,6 +11,7 @@ import { Tosleep } from './components/Tosleep'
 import Signup from './components/Signup'
 import Login from './components/Login'
 import { useEffect,useState } from 'react'
+import { Profile } from './components/Profile'
 
 function App() {
 
@@ -32,7 +33,8 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/tosleep" element={<Tosleep/>} />
       <Route path="/Signup"  element={<Signup/>} />
-      <Route path='/Login'user={user} setUser={setUser} element={<Login/>} />
+      <Route path='/Login'element={<Login user={user} setUser={setUser}/>} />
+      <Route path='/Profile'element={<Profile user={user} setUser={setUser}/>} />
     
 
      
